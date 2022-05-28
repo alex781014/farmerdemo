@@ -7,6 +7,15 @@ $title = '新增通訊錄 - 有機の小鱻肉';
 
 <?php include __DIR__ . '/parts/html-head.php' ?>
 <?php include __DIR__ . '/parts/navbar.php' ?>
+<style>
+    .form-control.red {
+        border: 1px solid red;
+    }
+
+    .red {
+        color: red;
+    }
+</style>
 <div class="container">
     <div class="row">
         <div class="col-md-6">
@@ -18,12 +27,12 @@ $title = '新增通訊錄 - 有機の小鱻肉';
                         <div class="mb-3">
                             <label for="product_id_1" class="form-label">* 食材編號</label>
                             <input type="text" class="form-control" id="product_id_1" name="product_id_1" require>
-                            <div class="form-text"></div>
+                            <div class="form-text red"></div>
                         </div>
                         <div class="mb-3">
                             <label for="product_name_1" class="form-label">* 食材品名</label>
-                            <input type="text" class="form-control" id="product_name_1" name="product_name_1">
-                            <div class="form-text"></div>
+                            <input type="text" class="form-control" id="product_name_1" name="product_name_1" require>
+                            <div class="form-text red"></div>
                         </div>
                         <div class="mb-3">
                             <label for="product_price_1" class="form-label">食材價格</label>
@@ -81,8 +90,27 @@ $title = '新增通訊錄 - 有機の小鱻肉';
                             <div class="form-text"></div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <!-- Button trigger modal -->
+                        <button type="submit"  class=" btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            submit
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body red">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -90,7 +118,43 @@ $title = '新增通訊錄 - 有機の小鱻肉';
 </div>
 <?php include __DIR__ . '/parts/scripts.php' ?>
 <script>
+    const productid1 = document.form1.product_id_1;
+    const prname1 = document.form1.product_name_1;
+    const modal_body = document.querySelector(".modal-body")
+
+    const fields = [productid1, prname1];
+    const fieldsTexts = [];
+    for (let f of fields) {
+        fieldsTexts.push(f.nextElementSibling);
+    }
+
     async function sendData() {
+        // 欄位外觀回復原來狀態
+        for (let i in fields) {
+            fields[i].classList.remove("red");
+            fieldsTexts[i].innerText = "";
+        }
+
+        let isPass = true;
+        if (productid1.value.length < 3) {
+            fields[0].classList.add("red");
+            fieldsTexts[0].innerText = "編號至少3字元";
+            modal_body.classList.add("red");
+            modal_body.innerText = "資料無法新增，請檢查欄位";
+            isPass = false;
+        }
+        if (prname1.value == "") {
+            fields[1].classList.add("red");
+            fieldsTexts[1].innerText = "品名不能為空";
+            modal_body.classList.add("red");
+            modal_body.innerText = "資料無法新增，請檢查欄位";
+            isPass = false;
+        }
+        // if(email_f.value && !email_re.test(email_f,value)){}
+        if (!isPass) {
+            return;
+        }
+
         const fd = new FormData(document.form1);
         const r = await fetch('ab-add-api.php', {
             method: 'POST',
@@ -98,6 +162,16 @@ $title = '新增通訊錄 - 有機の小鱻肉';
         });
         const result = await r.json();
         console.log(result)
+        if (result.success) {
+            modal_body.classList.remove("red");
+            modal_body.innerText = "資料新增成功"
+            setTimeout(() => {
+                productid1.value = "";
+                prname1.value = "";
+            }, 1500);
+
+        }
+
     }
 </script>
 <?php include __DIR__ . '/parts/html-foot.php' ?>
