@@ -1,5 +1,5 @@
 <?php require __DIR__ . '/parts/connect_db.php';
-$pageName = 'ab-list';
+$pageName = 'product-listR';
 $title = '客製化商品 - 有機の小鱻肉';
 
 //  ↑↑連資料庫  MVC的 M跟C 寫在這裡 再html出現之前
@@ -88,7 +88,10 @@ if (!empty($totalPages)) {  //如果有資料才往下走
                 <!-- 然後欄位對上面資料 -->
                 <tr>
                     <!--echo出來 這個代表某一筆的PK  以此類推-->
-                    <td><a href="#"><i class="fa-solid fa-trash-can trash"></i></a></td>
+                    <td>
+                        <?php /*<a href="product-delete.php?sid=<?= $r['sid'] ?>" onclick="return confirm('確定要刪除編號<?= $r['sid'] ?>這筆資料嗎')"><i class="fa-solid fa-trash-can trash"></i></a> */ ?>
+                        <a href="javascript:delete_it(<?= $r['sid'] ?>)"><i class="fa-solid fa-trash-can trash"></i></a>
+                    </td>
                     <td><?= $r['sid'] ?></td>
                     <td><?= $r['product_id_1'] ?></td>
                     <td><?= $r['product_name_1'] ?></td>
@@ -103,13 +106,20 @@ if (!empty($totalPages)) {  //如果有資料才往下走
                     <td><?= $r['total_product_price'] ?></td>
                     <td><?= $r['calorie'] ?></td>
                     <td><?= $r['custom_remark'] ?></td>
-                    <td><a href="#"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                    <td><a href="product-edit.php?sid=<?= $r['sid'] ?>"><i class="fa-solid fa-pen-to-square"></i></a></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
 </div>
 <?php include __DIR__ . '/parts/scripts.php' ?>
+<script>
+    function delete_it(sid) {
+        if (confirm(`確定要刪除編號為${sid}的資料嗎`)) {
+            location.href = `product-delete.php?sid=${sid}`;
+        }
+    }
+</script>
 
 <!-- <script>
     function delicon(event) {

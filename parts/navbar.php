@@ -19,10 +19,10 @@
                             <a class="nav-link <?= $pageName == 'index' ? 'active' : '' ?>" aria-current="page" href="index_.html">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?= $pageName == 'ab-list' ? 'active' : '' ?>" href="ab-list.php">產品列表</a>
+                            <a class="nav-link <?= $pageName == 'product-listR' ? 'active' : '' ?>" href="product-listR.php">產品列表</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?= $pageName == 'ab-add' ? 'active' : '' ?>" href="ab-add.php">新增產品</a>
+                            <a class="nav-link <?= $pageName == 'product-Creat' ? 'active' : '' ?>" href="product-Creat.php">新增產品</a>
                         </li>
 
                     </ul>

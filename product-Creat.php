@@ -1,6 +1,6 @@
 <?php require __DIR__ . '/parts/connect_db.php';
 
-$pageName = 'ab-add';
+$pageName = 'product-Creat';
 $title = '新增通訊錄 - 有機の小鱻肉';
 
 ?>
@@ -156,7 +156,7 @@ $title = '新增通訊錄 - 有機の小鱻肉';
         }
 
         const fd = new FormData(document.form1);
-        const r = await fetch('ab-add-api.php', {
+        const r = await fetch('product-Creat-api.php', {
             method: 'POST',
             body: fd,
         });
@@ -165,11 +165,6 @@ $title = '新增通訊錄 - 有機の小鱻肉';
         if (result.success) {
             modal_body.classList.remove("red");
             modal_body.innerText = "資料新增成功"
-            setTimeout(() => {
-                productid1.value = "";
-                prname1.value = "";
-            }, 1500);
-
         }
 
     }
