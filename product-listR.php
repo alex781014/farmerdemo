@@ -95,7 +95,7 @@ if (!empty($totalPages)) {  //如果有資料才往下走
                     </td>
                     <td><?= $r['sid'] ?></td>
                     <td><?= $r['product_id_1'] ?></td>
-                    <td><?= $r['product_name_1'] ?></td>
+                    <td><?= htmlentities($r['product_name_1']) ?></td>
                     <td><?= $r['product_price_1'] ?></td>
                     <td><?= $r['reference_receipt_id'] ?></td>
                     <td><?= $r['food_img'] ?></td>
@@ -106,8 +106,8 @@ if (!empty($totalPages)) {  //如果有資料才往下走
                     <td><?= $r['product_stock'] ?></td>
                     <td><?= $r['total_product_price'] ?></td>
                     <td><?= $r['calorie'] ?></td>
-                    <td><?= $r['custom_remark'] ?></td>
-                    <td><a href="product-edit.php?sid=<?= $r['sid'] ?>"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                    <td><?= htmlentities($r['custom_remark']) ?></td>
+                    <td><a href="product-Update.php?sid=<?= $r['sid'] ?>"><i class="fa-solid fa-pen-to-square"></i></a></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

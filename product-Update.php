@@ -1,7 +1,20 @@
 <?php require __DIR__ . '/parts/connect_db.php';
 
-$pageName = 'product-Creat';
-$title = '新增通訊錄 - 有機の小鱻肉';
+$pageName = 'product-Update';
+$title = '編輯 - 有機の小鱻肉';
+
+$sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
+if (empty($sid)) {
+    header("Location: product-listR.php");
+    exit;
+}
+
+
+$row = $pdo->query("SELECT * FROM `customized_products` WHERE sid = $sid")->fetch();
+if (empty($row)) {
+    header("Location: product-listR.php");
+    exit;
+}
 
 ?>
 
@@ -21,78 +34,79 @@ $title = '新增通訊錄 - 有機の小鱻肉';
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">新增食材</h5>
+                    <h5 class="card-title">編輯食材</h5>
                     <!-- form 給name 方便拿參照 -->
                     <form name="form1" onsubmit="sendData(); return false;" novalidate>
+                        <input type="hidden" name="sid" value="<?= $row['sid'] ?>">
                         <div class="mb-3">
                             <label for="product_id_1" class="form-label">* 食材編號</label>
-                            <input type="text" class="form-control" id="product_id_1" name="product_id_1" require>
+                            <input type="text" class="form-control" id="product_id_1" name="product_id_1" require value="<?= htmlentities($row['product_id_1']) ?>">
                             <div class="form-text red"></div>
                         </div>
                         <div class="mb-3">
                             <label for="product_name_1" class="form-label">* 食材品名</label>
-                            <input type="text" class="form-control" id="product_name_1" name="product_name_1" require>
+                            <input type="text" class="form-control" id="product_name_1" name="product_name_1" require value="<?= $row['product_name_1'] ?>">
                             <div class="form-text red"></div>
                         </div>
                         <div class="mb-3">
                             <label for="product_price_1" class="form-label">食材價格</label>
-                            <input type="text" class="form-control" id="product_price_1" name="product_price_1">
+                            <input type="text" class="form-control" id="product_price_1" name="product_price_1" value="<?= $row['product_price_1'] ?>">
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
                             <label for="reference_receipt_id " class="form-label">菜譜參考編號</label>
-                            <input type="text" class="form-control" id="reference_receipt_id" name="reference_receipt_id">
+                            <input type="text" class="form-control" id="reference_receipt_id" name="reference_receipt_id" value="<?= $row['reference_receipt_id'] ?>">
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
                             <label for="food_img" class="form-label">食材圖片</label>
-                            <input type="text" class="form-control" id="food_img" name="food_img">
+                            <input type="text" class="form-control" id="food_img" name="food_img" value="<?= $row['food_img'] ?>">
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
                             <label for="food_introduce" class="form-label">食材介紹</label>
-                            <input type="text" class="form-control" id="food_introduce" name="food_introduce">
+                            <input type="text" class="form-control" id="food_introduce" name="food_introduce" value="<?= $row['food_introduce'] ?>">
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
                             <label for="food_list" class="form-label">食材清單</label>
-                            <input type="text" class="form-control" id="food_list" name="food_list">
+                            <input type="text" class="form-control" id="food_list" name="food_list" value="<?= $row['food_list'] ?>">
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
                             <label for="food_Origin" class="form-label">產地</label>
-                            <input type="text" class="form-control" id="food_Origin" name="food_Origin">
+                            <input type="text" class="form-control" id="food_Origin" name="food_Origin" value="<?= $row['food_Origin'] ?>">
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
                             <label for="category_sid" class="form-label">分類編號</label>
-                            <input type="text" class="form-control" id="category_sid" name="category_sid">
+                            <input type="text" class="form-control" id="category_sid" name="category_sid" value="<?= $row['category_sid'] ?>">
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
                             <label for="product_stock" class="form-label">庫存</label>
-                            <input type="text" class="form-control" id="product_stock" name="product_stock">
+                            <input type="text" class="form-control" id="product_stock" name="product_stock" value="<?= $row['product_stock'] ?>">
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
                             <label for="total_product_price" class="form-label">總價格</label>
-                            <input type="text" class="form-control" id="total_product_price" name="total_product_price">
+                            <input type="text" class="form-control" id="total_product_price" name="total_product_price" value="<?= $row['total_product_price'] ?>">
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
                             <label for="calorie" class="form-label">卡路里</label>
-                            <input type="text" class="form-control" id="calorie" name="calorie">
+                            <input type="text" class="form-control" id="calorie" name="calorie" value="<?= $row['calorie'] ?>">
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
                             <label for="custom_remark" class="form-label">備註欄</label>
-                            <textarea name="custom_remark" id="custom_remark" name="custom_remark" cols="35" rows="5"></textarea>
+                            <textarea name="custom_remark" id="custom_remark" name="custom_remark" cols="35" rows="5"><?= $row['custom_remark'] ?></textarea>
                             <div class="form-text"></div>
                         </div>
 
                         <!-- Button trigger modal -->
                         <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            新增
+                            修改
                         </button>
                         <!-- Modal -->
                         <div class="showmodal modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -101,7 +115,8 @@ $title = '新增通訊錄 - 有機の小鱻肉';
                                     <div class="modal-header">
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <div class="modal-body red">
+                                    <div class="modal-body">
+                                        修改完成
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
@@ -164,7 +179,10 @@ $title = '新增通訊錄 - 有機の小鱻肉';
         console.log(result)
         if (result.success) {
             modal_body.classList.remove("red");
-            modal_body.innerText = "資料新增成功"
+            modal_body.innerText = "資料修改成功"
+        } else {
+            modal_body.classList.add("red");
+            modal_body.innerText = result.error || "資料無法修改"
         }
 
     }
