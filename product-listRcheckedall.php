@@ -90,8 +90,8 @@ if (!empty($totalPages)) {  //如果有資料才往下走
                     <!--echo出來 這個代表某一筆的PK  以此類推-->
                     <td>
                         <?php /*<a href="product-delete.php?sid=<?= $r['sid'] ?>" onclick="return confirm('確定要刪除編號<?= $r['sid'] ?>這筆資料嗎')"><i class="fa-solid fa-trash-can trash"></i></a> */ ?>
-                        <a href="javascript:delete_it(<?= $r['sid'] ?>)"><i class="fa-solid fa-trash-can trash"></i></a>
-                        <!-- <input type="checkbox" class="checkallinput" name="checkbox1"> -->
+                        <!-- <a href="javascript:delete_it(<?= $r['sid'] ?>)"><i class="fa-solid fa-trash-can trash"></i></a> -->
+                        <input type="checkbox" class="checkallinput" name="checkbox1">
                     </td>
                     <td><?= $r['sid'] ?></td>
                     <td><?= $r['product_id_1'] ?></td>
@@ -122,13 +122,13 @@ if (!empty($totalPages)) {  //如果有資料才往下走
     }
     let check = document.querySelectorAll(".checkallinput")
 
-    // function checkall() {
-    //     for (let i = 0; i < check.length; i++) {
-    //         let c = check[i];
-    //         c.checked = true;
-    //     }
-    //     // document.querySelector(".form-check-input").checked = true;
-    // }
+    function checkall() {
+        for (let i = 0; i < check.length; i++) {
+            let c = check[i];
+            c.checked = true;
+        }
+        // document.querySelector(".form-check-input").checked = true;
+    }
 </script>
 
 <!-- <script>
