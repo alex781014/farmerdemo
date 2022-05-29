@@ -86,16 +86,16 @@ $title = '新增通訊錄 - 有機の小鱻肉';
                         </div>
                         <div class="mb-3">
                             <label for="custom_remark" class="form-label">備註欄</label>
-                            <textarea name="custom_remark" id="custom_remark" name="custom_remark" cols="73" rows="5"></textarea>
+                            <textarea name="custom_remark" id="custom_remark" name="custom_remark" cols="35" rows="5"></textarea>
                             <div class="form-text"></div>
                         </div>
 
                         <!-- Button trigger modal -->
-                        <button type="submit"  class=" btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            submit
+                        <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            新增
                         </button>
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="showmodal modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
