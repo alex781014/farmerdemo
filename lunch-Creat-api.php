@@ -29,12 +29,13 @@ $lunch_4 = $_POST["lunch_4"] ?? '';
 $lunch_5 = $_POST["lunch_5"] ?? '';
 $lunch_name = $_POST["lunch_name"] ?? '';
 $total_price = $_POST["total_price"] ?? '';
+$lunchbox_stock = $_POST['lunchbox_stock'] ?? '';
+$total_calorie = $_POST['total_calorie'] ?? '';
+$custom_remark = $_POST['custom_remark'] ?? '';
+$reference_receipt_id = $_POST['reference_receipt_id'] ?? '';
 
-
-$sql = "INSERT INTO `customized_lunch`(
-     `lunch_1`, `lunch_2`, `lunch_3`, `lunch_4`, `lunch_5`, `lunch_name`, `total_price`
-    ) VALUES (
-        ?,?,?,?,?,?,?,?
+$sql = "INSERT INTO `customized_lunch`(`lunch_1`, `lunch_2`, `lunch_3`, `lunch_4`, `lunch_5`, `lunch_name`, `total_price`, `lunchbox_stock`, `total_calorie`, `custom_remark`, `reference_receipt_id`) VALUES (
+        ?,?,?,?,?,?,?,?,?,?,?
     )";
 
 $stmt = $pdo->prepare($sql);
@@ -44,10 +45,13 @@ $stmt->execute([
     $lunch_2,
     $lunch_3,
     $lunch_4,
-    $lunch_4,
     $lunch_5,
     $lunch_name,
     $total_price,
+    $lunchbox_stock,
+    $total_calorie,
+    $custom_remark,
+    $reference_receipt_id
 ]);
 
 if ($stmt->rowCount() == 1) {
