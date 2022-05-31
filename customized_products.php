@@ -4,9 +4,8 @@ $pageName = 'customized_products';
 $title = '客製化商品 - 有機の小鱻肉';
 
 $rows = [];
-$sql = sprintf("SELECT * FROM `product` ORDER BY product_id");
+$sql = sprintf("SELECT * FROM `product` WHERE product_id");
 $rows = $pdo->query($sql)->fetchAll();
-
 ?>
 
 <?php include __DIR__ . '/parts/html-head.php' ?>
@@ -20,13 +19,14 @@ $rows = $pdo->query($sql)->fetchAll();
         width: 75px;
     }
 </style>
-<div class="container mt-3">
-    <form name="form1" class="d-flex flex-wrap" onsubmit=" sendData(); return false">
+<form name="form1" class="d-flex flex-wrap" onsubmit=" sendData(); return false">
+    <div class="container mt-3">
+
         <div class="row">
             <div class="col-3 ">
 
                 <?php foreach ($rows as $r) : ?>
-                    <input type="text" class="btn btn-success mb-3" name="product_name" value="<?= $r['product_name'] ?>">
+                    <input type="text" class="btn btn-success mb-3" name="product_name" value="<?= $r['product_name'] ?> ">
                 <?php endforeach; ?>
 
             </div>
@@ -58,7 +58,7 @@ $rows = $pdo->query($sql)->fetchAll();
 
             </div>
         </div>
-    </form>
+</form>
 </div>
 <?php include __DIR__ . '/parts/scripts.php' ?>
 <script>
@@ -66,6 +66,7 @@ $rows = $pdo->query($sql)->fetchAll();
     const foodArea = document.querySelector(".foodArea")
     const card = document.querySelector(".card")
     let str = "";
+    let limit = []
     btn.addEventListener("click", e => {
         str = `<div class="card">
                     <img src="./customized_products_img/<?= $r['product_img'] ?>" class="card-img-top" alt="...">
@@ -74,6 +75,13 @@ $rows = $pdo->query($sql)->fetchAll();
                         <a href="#" class="btn btn-danger" onclick="delete_it(event)">刪除</a>
                 </div>`
         foodArea.innerHTML += str
+        limit.push(str);
+        console.log(limit)
+        if (limit.length > 5) {
+            console.log("123")
+            alert("食材只能選五樣唷~")
+            window.location.href = "customized_products.php"
+        }
     })
 
     function delete_it(event) {
