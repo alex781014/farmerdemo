@@ -24,6 +24,9 @@
                         <li class="nav-item">
                             <a class="nav-link <?= $pageName == 'product-Creat' ? 'active' : '' ?>" href="product-Creat.php">新增產品</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?= $pageName == 'customized_products' ? 'active' : '' ?>" href="customized_products.php">客製化商品</a>
+                        </li>
 
                     </ul>
 
