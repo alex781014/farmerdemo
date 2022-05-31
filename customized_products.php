@@ -25,16 +25,14 @@ $rows = $pdo->query($sql)->fetchAll();
         </div>
         <div class="col-9 ">
             <div class="foodArea d-flex">
-                <?php foreach ($rows as $r) : ?>
 
-                    <div class="card d-none">
-                        <img src="./customized_products_img/<?= $r['product_img'] ?>" class="card-img-top" alt="...">
-                        <div class="card-body text-center">
-                            <p class="card-text">食材名稱</p>
-                            <a href="javascript:delete_it(<?= $r['sid'] ?>)" class="btn btn-danger">刪除</a>
-                        </div>
+                <div class="card">
+                    <img src="./customized_products_img/<?= $r['product_img'] ?>" class="card-img-top" alt="...">
+                    <div class="card-body text-center">
+                        <p class="card-text">食材名稱</p>
+                        <a href="javascript:delete_it(<?= $r['sid'] ?>)" class="btn btn-danger">刪除</a>
                     </div>
-                <?php endforeach; ?>
+                </div>
 
 
             </div>
