@@ -6,6 +6,7 @@ $title = '客製化商品 - 有機の小鱻肉';
 $rows = [];
 $sql = sprintf("SELECT * FROM `product` WHERE product_id");
 $rows = $pdo->query($sql)->fetchAll();
+
 ?>
 
 <?php include __DIR__ . '/parts/html-head.php' ?>
@@ -21,12 +22,13 @@ $rows = $pdo->query($sql)->fetchAll();
 </style>
 <form name="form1" class="d-flex flex-wrap" onsubmit=" sendData(); return false">
     <div class="container mt-3">
-
         <div class="row">
             <div class="col-3 ">
-
-                <?php foreach ($rows as $r) : ?>
-                    <input type="text" class="btn btn-success mb-3" name="product_name" value="<?= $r['product_name'] ?> ">
+                <?php foreach ($rows as $k => $r) : ?>
+                    <button type="button" class="btn btn-success" data-img="./customized_products_img/<?= $r['product_img'] ?>">
+                        <?= $r['product_name'] ?>
+                    </button>
+                    <!-- <input type="text" class="btn btn-success mb-3" name="<?= "product_name" . ($k + 1) ?> " value="<?= $r['product_name'] ?> "> -->
                 <?php endforeach; ?>
 
             </div>
@@ -44,7 +46,7 @@ $rows = $pdo->query($sql)->fetchAll();
                     <label for="exampleFormControlSelect1">需要幾份</label>
                     <select class="form-control" id="exampleFormControlSelect1" name="lunchbox_stock">
                         <option>1</option>
-                        <option>2</option>
+                        <option>2</option> 
                         <option>3</option>
                         <option>4</option>
                         <option>5</option>
