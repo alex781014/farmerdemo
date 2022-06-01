@@ -6,6 +6,7 @@ $title = '客製化商品 - 有機の小鱻肉';
 $rows = [];
 $sql = sprintf("SELECT * FROM `product` WHERE `product_id`");
 $rows = $pdo->query($sql)->fetchAll();
+
 ?>
 
 <?php include __DIR__ . '/parts/html-head.php' ?>
@@ -21,12 +22,11 @@ $rows = $pdo->query($sql)->fetchAll();
 </style>
 <form name="form1" class="d-flex flex-wrap" onsubmit=" sendData(); return false">
     <div class="container mt-3">
-
         <div class="row">
             <div class="col-3 ">
 
-                <?php foreach ($rows as $r) : ?>
-                    <button type="button" class="btn btn-success mb-3"><?= $r['product_name'] ?> </button>
+                <?php foreach ($rows as $k => $r) : ?>
+                    <button type="button" onclick="showimg()" class="btn btn-success mb-3"><?= $r['product_name'] ?> </button>
                 <?php endforeach; ?>
 
             </div>
@@ -67,7 +67,8 @@ $rows = $pdo->query($sql)->fetchAll();
     const card = document.querySelector(".card")
     let str = "";
     let limit = []
-    btn.addEventListener("click", e => {
+
+    function showimg() {
         str = `<div class="card">
                     <img src="./customized_products_img/<?= $r['product_img'] ?>" class="card-img-top" alt="...">
                     <div class="card-body text-center">
@@ -82,7 +83,24 @@ $rows = $pdo->query($sql)->fetchAll();
             alert("食材只能選五樣唷~")
             window.location.href = "customized_products.php"
         }
-    })
+    }
+
+    // btn.addEventListener("click", e => {
+    //     str = `<div class="card">
+    //                 <img src="./customized_products_img/<?= $r['product_img'] ?>" class="card-img-top" alt="...">
+    //                 <div class="card-body text-center">
+    //                     <p class="card-text"><?= $r['product_name'] ?></p>
+    //                     <a href="#" class="btn btn-danger" onclick="delete_it(event)">刪除</a>
+    //             </div>`
+    //     foodArea.innerHTML += str
+    //     limit.push(str);
+    //     console.log(limit)
+    //     if (limit.length > 5) {
+    //         console.log("123")
+    //         alert("食材只能選五樣唷~")
+    //         window.location.href = "customized_products.php"
+    //     }
+    // })
 
     function delete_it(event) {
         const de = event.target.closest(".card");
