@@ -25,7 +25,7 @@ $rows = $pdo->query($sql)->fetchAll();
             <div class="col-3 ">
 
                 <?php foreach ($rows as  $r) : ?>
-                    <button type="button" onclick="showimg(event)" class="btn btn-success mb-3" data-img="./customized_products_img/<?= $r['product_img'] ?>">
+                    <button type="button" onclick="showimg(event)" class="btn btn-success mb-3" data-img="./customized_products_img/<?= $r['product_img'] ?>" data-price="<?= $r['product_price'] ?>">
                         <?= $r['product_name'] ?>
                     </button>
                 <?php endforeach; ?>
@@ -66,12 +66,16 @@ $rows = $pdo->query($sql)->fetchAll();
     const foodArea = document.querySelector(".foodArea")
     const card = document.querySelector(".card")
     let str = "";
-    let products = []
+    let products = [];
+    let totalPrice = [];
+    let sum = 0;
 
     function showimg(event) {
         const btn = event.currentTarget;
         const name = btn.innerText;
         const img = btn.getAttribute("data-img");
+        const price = parseInt(btn.getAttribute("data-price"));
+
         if (products.length + 1 > 5) {
             alert("食材只能選五樣唷~")
             // window.location.href = "customized_products.php"
@@ -82,33 +86,21 @@ $rows = $pdo->query($sql)->fetchAll();
                     <img src="${img}" class="card-img-top" alt="...">
                     <div class="card-body text-center">
                         <p class="card-text">${btn.innerText.trim()}</p>
+                        <p class="card-text">價格:${price}</p>
                         <a href="#" class="btn btn-danger" onclick="delete_it(event)" data-pName=${name}>刪除</a>
+                    </div>
                 </div>`
-        foodArea.innerHTML += str
+        foodArea.innerHTML += str;
         products.push(name);
-        console.log(products)
+        totalPrice.push(price);
+        for (let t = 0; t < totalPrice.length; t++) {
+            sum += totalPrice[t];
+        }
     }
 
-    // btn.addEventListener("click", e => {
-    //     str = `<div class="card">
-    //                 <img src="./customized_products_img/<?= $r['product_img'] ?>" class="card-img-top" alt="...">
-    //                 <div class="card-body text-center">
-    //                     <p class="card-text"><?= $r['product_name'] ?></p>
-    //                     <a href="#" class="btn btn-danger" onclick="delete_it(event)">刪除</a>
-    //             </div>`
-    //     foodArea.innerHTML += str
-    //     limit.push(str);
-    //     console.log(limit)
-    //     if (limit.length > 5) {
-    //         console.log("123")
-    //         alert("食材只能選五樣唷~")
-    //         window.location.href = "customized_products.php"
-    //     }
-    // })
-
-    function delete_it(event) {
-        const currentProduct = event.target.getAttribute('data-pName')
-        products = products.filter(product => product !== currentProduct)
+    function delete_it(e) {
+        const currentProduct = e.target.getAttribute('data-pName');
+        products = products.filter(product => product !== currentProduct);
         const de = event.target.closest(".card");
         de.remove();
     }
@@ -117,7 +109,8 @@ $rows = $pdo->query($sql)->fetchAll();
         event.preventDefault();
         const form1 = document.getElementById('form1')
         const fd = new FormData(form1);
-        fd.append('products', JSON.stringify(products))
+        fd.append('products', JSON.stringify(products));
+        fd.append('totalPrice', JSON.stringify(totalPrice));
 
         try {
             const response = await fetch('customized_products-creat-api.php', {
