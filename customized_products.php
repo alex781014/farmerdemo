@@ -25,8 +25,8 @@ $rows = $pdo->query($sql)->fetchAll();
         <div class="row">
             <div class="col-3 ">
 
-                <?php foreach ($rows as $r) : ?>
-                    <input type="text" class="btn btn-success mb-3" name="product_name" value="<?= $r['product_name'] ?> ">
+                <?php foreach ($rows as $k => $r) : ?>
+                    <button type="button" class="btn btn-success mb-3"><?= $r['product_name'] ?> </button>
                 <?php endforeach; ?>
 
             </div>
