@@ -4,7 +4,7 @@ $pageName = 'customized_products';
 $title = '客製化商品 - 有機の小鱻肉';
 
 $rows = [];
-$sql = sprintf("SELECT * FROM `product` WHERE product_id");
+$sql = sprintf("SELECT * FROM `product` WHERE `product_id`");
 $rows = $pdo->query($sql)->fetchAll();
 ?>
 
@@ -26,7 +26,7 @@ $rows = $pdo->query($sql)->fetchAll();
             <div class="col-3 ">
 
                 <?php foreach ($rows as $r) : ?>
-                    <input type="text" class="btn btn-success mb-3" name="product_name" value="<?= $r['product_name'] ?> ">
+                    <button type="button" class="btn btn-success mb-3"><?= $r['product_name'] ?> </button>
                 <?php endforeach; ?>
 
             </div>
