@@ -14,10 +14,6 @@ $rows = $pdo->query($sql)->fetchAll();
     .card {
         width: 400px;
     }
-
-    input {
-        width: 75px;
-    }
 </style>
 <form id="form1" name="form1" class="d-flex flex-wrap" onsubmit="sendData(event)" enctype="multipart/form-data">
     <div class=" container mt-3">
@@ -44,7 +40,8 @@ $rows = $pdo->query($sql)->fetchAll();
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">需要幾份</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="lunchbox_stock">
+                    <select class="form-control" id="exampleFormControlSelect1" name="lunchbox_stock" required>
+                        <option value="" selected disabled>-- 請選擇 --</option>
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -70,7 +67,7 @@ $rows = $pdo->query($sql)->fetchAll();
     let str = "";
     let products = [];
     let totalPrice = [];
-    let sum = 0;
+// 下select表單下事件
 
     function showimg(event) {
         const btn = event.currentTarget;
@@ -80,7 +77,6 @@ $rows = $pdo->query($sql)->fetchAll();
 
         if (products.length + 1 > 5) {
             alert("食材只能選五樣唷~")
-            // window.location.href = "customized_products.php"
             return
         }
 
@@ -95,12 +91,10 @@ $rows = $pdo->query($sql)->fetchAll();
         foodArea.innerHTML += str;
         products.push(name);
         totalPrice.push(price);
-        for (let t = 0; t < totalPrice.length; t++) {
-            sum += totalPrice[t];
-        }
-        priceArea.innerHTML = `<p>總價為${sum}元</p>`;
-
     }
+
+
+
 
     function delete_it(e) {
         const currentProduct = e.target.getAttribute('data-pName');
