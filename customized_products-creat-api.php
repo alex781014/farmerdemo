@@ -4,25 +4,25 @@ header('Content-Type: application/json');
 
 $output = [
     'success' => false,
-    'postDate' => $_POST,
+    'postData' => $_POST,
     'code' => 0,
     'error' => '',
 ];
-if (empty($_POST['product_name'])) {
+if (empty($_POST['products'])) {
     $output['error'] = '沒有資料';
     $output['code'] = 403;
     echo json_encode($output, JSON_UNESCAPED_UNICODE);
     exit;
 };
 
+$products = json_decode($_POST["products"]);
 
 
-
-$productname1 = $_POST["product_name1"] ?? '';
-$productname2 = $_POST["product_name2"] ?? '';
-$productname3 = $_POST["product_name3"] ?? '';
-$productname4 = $_POST["product_name4"] ?? '';
-$productname5 = $_POST["product_name5"] ?? '';
+$productname1 = $products[0] ?? '';
+$productname2 = $products[1] ?? '';
+$productname3 = $products[2] ?? '';
+$productname4 = $products[3] ?? '';
+$productname5 = $products[4] ?? '';
 $lunchname =   $_POST["lunchname"] ?? '';
 $total_price =   $_POST["total_price"] ?? '';
 $lunchbox_stock =   $_POST["lunchbox_stock"] ?? '';
