@@ -36,7 +36,8 @@ $rows = $pdo->query($sql)->fetchAll();
 
                 </div>
 
-
+                <div class="priceArea">
+                </div>
                 <div class="form-group">
                     <label for="">請為您的客製化便當命名</label>
                     <input type="text" class="form-control" name="lunchname" id="" placeholder="請輸入便當名稱">
@@ -65,6 +66,7 @@ $rows = $pdo->query($sql)->fetchAll();
     const btn = document.querySelector(".btn");
     const foodArea = document.querySelector(".foodArea")
     const card = document.querySelector(".card")
+    const priceArea = document.querySelector(".priceArea")
     let str = "";
     let products = [];
     let totalPrice = [];
@@ -96,6 +98,8 @@ $rows = $pdo->query($sql)->fetchAll();
         for (let t = 0; t < totalPrice.length; t++) {
             sum += totalPrice[t];
         }
+        priceArea.innerHTML = `<p>總價為${sum}元</p>`;
+
     }
 
     function delete_it(e) {
@@ -110,7 +114,6 @@ $rows = $pdo->query($sql)->fetchAll();
         const form1 = document.getElementById('form1')
         const fd = new FormData(form1);
         fd.append('products', JSON.stringify(products));
-        fd.append('totalPrice', JSON.stringify(totalPrice));
 
         try {
             const response = await fetch('customized_products-creat-api.php', {
