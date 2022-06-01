@@ -18,11 +18,11 @@ if (empty($_POST['product_name'])) {
 
 
 
-$productname1 = $_POST["product_name"] ?? '';
-$productname2 = $_POST["product_name"] ?? '';
-$productname3 = $_POST["product_name"] ?? '';
-$productname4 = $_POST["product_name"] ?? '';
-$productname5 = $_POST["product_name"] ?? '';
+$productname1 = $_POST["product_name1"] ?? '';
+$productname2 = $_POST["product_name2"] ?? '';
+$productname3 = $_POST["product_name3"] ?? '';
+$productname4 = $_POST["product_name4"] ?? '';
+$productname5 = $_POST["product_name5"] ?? '';
 $lunchname =   $_POST["lunchname"] ?? '';
 $total_price =   $_POST["total_price"] ?? '';
 $lunchbox_stock =   $_POST["lunchbox_stock"] ?? '';

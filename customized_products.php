@@ -6,6 +6,7 @@ $title = '客製化商品 - 有機の小鱻肉';
 $rows = [];
 $sql = sprintf("SELECT * FROM `product` WHERE product_id");
 $rows = $pdo->query($sql)->fetchAll();
+
 ?>
 
 <?php include __DIR__ . '/parts/html-head.php' ?>
@@ -21,7 +22,6 @@ $rows = $pdo->query($sql)->fetchAll();
 </style>
 <form name="form1" class="d-flex flex-wrap" onsubmit=" sendData(); return false">
     <div class="container mt-3">
-
         <div class="row">
             <div class="col-3 ">
 
