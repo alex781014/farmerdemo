@@ -40,7 +40,7 @@ $rows = $pdo->query($sql)->fetchAll();
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">需要幾份</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="lunchbox_stock" required>
+                    <select onchange="getcount()" class="form-control lunchbox_stock" id="exampleFormControlSelect1" name="lunchbox_stock" required>
                         <option value="" selected disabled>-- 請選擇 --</option>
                         <option>1</option>
                         <option>2</option>
@@ -61,20 +61,21 @@ $rows = $pdo->query($sql)->fetchAll();
 <?php include __DIR__ . '/parts/scripts.php' ?>
 <script>
     const btn = document.querySelector(".btn");
-    const foodArea = document.querySelector(".foodArea")
-    const card = document.querySelector(".card")
-    const priceArea = document.querySelector(".priceArea")
+    const foodArea = document.querySelector(".foodArea");
+    const card = document.querySelector(".card");
+    const priceArea = document.querySelector(".priceArea");
     let str = "";
     let products = [];
     let totalPrice = [];
-// 下select表單下事件
+    let final;
+    let finalPrice;
+    const lunchboxStock = document.querySelector(".lunchbox_stock");
 
     function showimg(event) {
         const btn = event.currentTarget;
         const name = btn.innerText;
         const img = btn.getAttribute("data-img");
         const price = parseInt(btn.getAttribute("data-price"));
-
         if (products.length + 1 > 5) {
             alert("食材只能選五樣唷~")
             return
@@ -91,7 +92,28 @@ $rows = $pdo->query($sql)->fetchAll();
         foodArea.innerHTML += str;
         products.push(name);
         totalPrice.push(price);
+        let sum = 0;
+        for (let i = 0; i < totalPrice.length; i++) {
+            sum += totalPrice[i]
+        }
+        priceArea.innerHTML = `<p>總價為${sum}元</p>`
+        final = sum
+        console.log(sum)
+        console.log(final)
     }
+
+
+
+
+
+
+
+    function getcount() {
+        d = lunchboxStock.value;
+        priceArea.innerHTML = `<p>總價為${final * d}元</p>`
+        finalPrice = final * d;
+    }
+
 
 
 
@@ -108,6 +130,7 @@ $rows = $pdo->query($sql)->fetchAll();
         const form1 = document.getElementById('form1')
         const fd = new FormData(form1);
         fd.append('products', JSON.stringify(products));
+        fd.append('finalPrice', JSON.stringify(finalPrice));
 
         try {
             const response = await fetch('customized_products-creat-api.php', {
