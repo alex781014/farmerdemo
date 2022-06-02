@@ -100,7 +100,6 @@ $rows = $pdo->query($sql)->fetchAll();
         products.push(name);
 
         totalPrice.push(price);
-
         let sum = 0;
         for (let i = 0; i < totalPrice.length; i++) {
             sum += totalPrice[i]
@@ -116,6 +115,7 @@ $rows = $pdo->query($sql)->fetchAll();
         price = parseInt(delprice)
         const de = event.target.closest(".card");
         de.remove();
+        totalPrice.pop();
         final = final - price;
         priceArea.innerHTML = `<p>總價為${final}元</p>`
     }
