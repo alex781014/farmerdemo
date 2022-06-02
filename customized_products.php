@@ -20,26 +20,28 @@ $rows = $pdo->query($sql)->fetchAll();
         height: 13vw;
         object-fit: contain;
     }
+
+    .priceArea {
+        cursor: default;
+    }
 </style>
 <form id="form1" name="form1" class="d-flex flex-wrap" onsubmit="sendData(event)" enctype="multipart/form-data">
     <div class=" container mt-3">
         <div class="row">
-            <div class="col-3 ">
-
+            <div class="col-2">
                 <?php foreach ($rows as  $r) : ?>
                     <button type="button" onclick="showcard(event)" class="btn btn-success mb-3" data-img="./customized_products_img/<?= $r['product_img'] ?>" data-price="<?= $r['product_price'] ?>">
                         <?= $r['product_name'] ?>
                     </button>
                 <?php endforeach; ?>
-
             </div>
-            <div class="col-9 h-100 ">
+            <div class="col-8 h-100 ">
                 <div class="foodArea d-flex">
 
                 </div>
 
-                <div class="priceArea">
-                </div>
+            </div>
+            <div class="col-2">
                 <div class="form-group">
                     <label for="">請為您的客製化便當命名</label>
                     <input type="text" class="form-control" name="lunchname" id="" placeholder="請輸入便當名稱">
@@ -59,9 +61,11 @@ $rows = $pdo->query($sql)->fetchAll();
                     <label for="exampleFormControlTextarea1">備註欄</label>
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="custom_remark"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">送出</button>
+                <div class="priceArea btn btn-success my-3">
+                    <p class="mb-0">總價:</p>
+                </div>
+                <button type="submit" class="btn btn-primary" style="display:block">送出</button>
             </div>
-        </div>
 </form>
 </div>
 <?php include __DIR__ . '/parts/scripts.php' ?>
@@ -105,7 +109,7 @@ $rows = $pdo->query($sql)->fetchAll();
             sum += totalPrice[i]
         }
         final = sum
-        priceArea.innerHTML = `<p>總價為${final}元</p>`
+        priceArea.innerHTML = `<p class="mb-0" >總價:${final}元</p>`
     }
 
     function delete_it(e) {
@@ -117,13 +121,13 @@ $rows = $pdo->query($sql)->fetchAll();
         const de = event.target.closest(".card");
         de.remove();
         final = final - delprice;
-        priceArea.innerHTML = `<p>總價為${final*d}元</p>`
+        priceArea.innerHTML = `<p class="mb-0" >總價:${final*d}元</p>`
     }
 
     function getcount() {
         d = lunchboxStock.value;
         finalPrice = final * d;
-        priceArea.innerHTML = `<p>總價為${final * d}元</p>`
+        priceArea.innerHTML = `<p class="mb-0" >總價:${final * d}元</p>`
     }
 
 
