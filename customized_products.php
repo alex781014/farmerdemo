@@ -17,7 +17,7 @@ $rows = $pdo->query($sql)->fetchAll();
 
     .card-img-top {
         width: 100%;
-        height: 15vw;
+        height: 13vw;
         object-fit: contain;
     }
 </style>
@@ -110,14 +110,14 @@ $rows = $pdo->query($sql)->fetchAll();
 
     function delete_it(e) {
         const currentProduct = e.target.getAttribute('data-pName');
-        const delprice = e.currentTarget.getAttribute('data-price')
+        const delprice = parseInt(e.target.getAttribute('data-price'))
         products = products.filter(product => product !== currentProduct);
-        price = parseInt(delprice)
+        totalPrice = totalPrice.filter(i => i !== delprice)
+
         const de = event.target.closest(".card");
         de.remove();
-        totalPrice.pop();
-        final = final - price;
-        priceArea.innerHTML = `<p>總價為${final}元</p>`
+        final = final - delprice;
+        priceArea.innerHTML = `<p>總價為${final*d}元</p>`
     }
 
     function getcount() {
