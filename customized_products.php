@@ -14,10 +14,6 @@ $rows = $pdo->query($sql)->fetchAll();
     .card {
         width: 400px;
     }
-
-    input {
-        width: 75px;
-    }
 </style>
 <form id="form1" name="form1" class="d-flex flex-wrap" onsubmit="sendData(event)" enctype="multipart/form-data">
     <div class=" container mt-3">
@@ -118,7 +114,6 @@ $rows = $pdo->query($sql)->fetchAll();
         const form1 = document.getElementById('form1')
         const fd = new FormData(form1);
         fd.append('products', JSON.stringify(products))
-
         try {
             const response = await fetch('customized_products-creat-api.php', {
                 method: 'POST',
