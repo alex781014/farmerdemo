@@ -16,6 +16,7 @@ if (empty($_POST['products'])) {
 };
 
 $products = json_decode($_POST["products"]);
+$finalPrice = json_decode($_POST["finalPrice"]);
 
 
 $productname1 = $products[0] ?? '';
@@ -24,7 +25,7 @@ $productname3 = $products[2] ?? '';
 $productname4 = $products[3] ?? '';
 $productname5 = $products[4] ?? '';
 $lunchname =   $_POST["lunchname"] ?? '';
-$total_price =   $_POST["total_price"] ?? '';
+$total_price =   $finalPrice ?? '';
 $lunchbox_stock =   $_POST["lunchbox_stock"] ?? '';
 $total_calorie =   $_POST["total_calorie"] ?? '';
 $custom_remark =   $_POST["custom_remark"] ?? '';
