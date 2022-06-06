@@ -49,7 +49,7 @@ $rows = $pdo->query($sql)->fetchAll();
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">需要幾份</label>
                     <select onchange="getcount()" class="form-control lunchbox_stock" id="exampleFormControlSelect1" name="lunchbox_stock" required>
-                        <option value="-- 請選擇 --" selected>-- 請選擇 --</option>
+                        <option value="" selected disabled>-- 請選擇 --</option>
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
