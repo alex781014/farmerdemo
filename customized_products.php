@@ -130,7 +130,12 @@ $rows = $pdo->query($sql)->fetchAll();
     function getcount() {
         d = lunchboxStock.value;
         finalPrice = final * d;
-        priceArea.innerHTML = `<p class="mb-0" >總價:${final * d}元</p>`
+        if (str == "") {
+            return;
+        } else {
+            priceArea.innerHTML = `<p class="mb-0" >總價:${final * d}元</p>`
+
+        }
     }
 
 
