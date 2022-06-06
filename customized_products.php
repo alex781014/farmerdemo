@@ -49,7 +49,7 @@ $rows = $pdo->query($sql)->fetchAll();
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">需要幾份</label>
                     <select onchange="getcount()" class="form-control lunchbox_stock" id="exampleFormControlSelect1" name="lunchbox_stock" required>
-                        <option value="" selected disabled>-- 請選擇 --</option>
+                        <option value="-- 請選擇 --" selected>-- 請選擇 --</option>
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -121,7 +121,10 @@ $rows = $pdo->query($sql)->fetchAll();
         const de = event.target.closest(".card");
         de.remove();
         final = final - delprice;
-        priceArea.innerHTML = `<p class="mb-0" >總價:${final*d}元</p>`
+
+        priceArea.innerHTML = `<p class="mb-0" >總價:${final}元</p>`
+        lunchboxStock.value = lunchboxStock.options[0].value;
+
     }
 
     function getcount() {
