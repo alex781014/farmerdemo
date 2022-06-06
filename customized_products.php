@@ -25,7 +25,7 @@ $rows = $pdo->query($sql)->fetchAll();
         cursor: default;
     }
 </style>
-<form id="form1" name="form1" class="d-flex flex-wrap" onsubmit="sendData(event)" enctype="multipart/form-data">
+<form id="form1" name="form1" class="d-flex flex-wrap needs-validation" onsubmit="sendData(event)" enctype="multipart/form-data">
     <div class=" container mt-3">
         <div class="row">
             <div class="col-2">
@@ -64,27 +64,9 @@ $rows = $pdo->query($sql)->fetchAll();
                 <div class="priceArea btn btn-success my-3">
                     <p class="mb-0">總價:</p>
                 </div>
-                <button type="submit" class="btn btn-primary" style="display:block" data-toggle="modal" data-target="#exampleModal">送出</button>
+                <button type="submit" class="btn btn-primary" style="display:block">送出</button>
             </div>
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            ...
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
 </form>
 </div>
 <?php include __DIR__ . '/parts/scripts.php' ?>
@@ -160,7 +142,7 @@ $rows = $pdo->query($sql)->fetchAll();
 
 
     async function sendData(event) {
-        event.preventDefault();
+        confirm("訂單即將送出，請確認訂單食材，如確認無誤請按'確定'送出訂單")
         const form1 = document.getElementById('form1')
         const fd = new FormData(form1);
         fd.append('products', JSON.stringify(products));
