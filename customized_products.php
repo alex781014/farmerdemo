@@ -8,7 +8,7 @@ $sql = sprintf("SELECT * FROM `product` WHERE `product_id`");
 $rows = $pdo->query($sql)->fetchAll();
 ?>
 
-<?php include __DIR__ . '/parts/html-head.php' ?>
+<?php include __DIR__ . '/parts/html_head.php' ?>
 <?php include __DIR__ . '/parts/navbar.php' ?>
 <style>
     .card {
@@ -30,7 +30,7 @@ $rows = $pdo->query($sql)->fetchAll();
         <div class="row">
             <div class="col-2">
                 <?php foreach ($rows as  $r) : ?>
-                    <button type="button" onclick="showcard(event)" class="btn btn-success mb-3" data-img="./customized_products_img/<?= $r['product_img'] ?>" data-price="<?= $r['product_price'] ?>">
+                    <button type="button" onclick="showcard(event)" class="btn btn-success mb-3" data-img="./images/<?= $r['product_img'] ?>" data-price="<?= $r['product_price'] ?>">
                         <?= $r['product_name'] ?>
                     </button>
                 <?php endforeach; ?>
@@ -158,4 +158,4 @@ $rows = $pdo->query($sql)->fetchAll();
         }
     }
 </script>
-<?php include __DIR__ . '/parts/html-foot.php' ?>
+<?php include __DIR__ . '/parts/html_foot.php' ?>
