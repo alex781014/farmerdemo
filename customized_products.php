@@ -21,7 +21,7 @@ $rows = $pdo->query($sql)->fetchAll();
             <div class="col-3 ">
 
                 <?php foreach ($rows as  $r) : ?>
-                    <button type="button" onclick="showimg(event)" class="btn btn-success mb-3" data-img="./customized_products_img/<?= $r['product_img'] ?>" data-price="<?= $r['product_price'] ?>">
+                    <button type="button" onclick="showimg(event)" class="btn btn-success mb-3" data-img="./customized_products_img/<?= $r['product_img'] ?>" data-price="<?= $r['product_price'] ?>" data-calorie="<?=$r['']?>">
                         <?= $r['product_name'] ?>
                     </button>
                 <?php endforeach; ?>
@@ -101,23 +101,11 @@ $rows = $pdo->query($sql)->fetchAll();
         console.log(sum)
         console.log(final)
     }
-
-
-
-
-
-
-
     function getcount() {
         d = lunchboxStock.value;
         priceArea.innerHTML = `<p>總價為${final * d}元</p>`
         finalPrice = final * d;
     }
-
-
-
-
-
     function delete_it(e) {
         const currentProduct = e.target.getAttribute('data-pName');
         products = products.filter(product => product !== currentProduct);
